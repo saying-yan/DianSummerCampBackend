@@ -25,7 +25,7 @@ def init_mysql():
                 intro = product_json["intro"]
                 imgs = product_json["images"]
                 img1 = imgs[0]["url"]
-                if len(imgs > 1):
+                if len(imgs) > 1:
                     img2 = imgs[1]["url"]
                 else:
                     img2 = ""

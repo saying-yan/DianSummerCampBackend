@@ -45,7 +45,7 @@ class Products(db.Model):
     introduction = db.Column(db.String(100))
     img = db.Column(db.String(150))
     img2 = db.Column(db.String(150))
-    price = db.Column(db.Float(precision="5,2"))
+    price = db.Column(db.Float(precision="7,2"))
 
     productcategory = db.relationship('ProductCategory', backref=db.backref("product_of_category"))
 
@@ -63,7 +63,7 @@ class Mixture(db.Model):
     __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'} 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50))
-    price = db.Column(db.Float(precision="5,2"))
+    price = db.Column(db.Float(precision="7,2"))
 
     def __init__(self, name, price) -> None:
         self.name = name
