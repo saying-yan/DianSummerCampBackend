@@ -14,7 +14,7 @@ class UserInfo(db.Model):
     def __init__(self, username, phone_number, password) -> None:
         self.username = username
         self.phone_number = phone_number
-        self.password_hash = self.set_password(password)
+        self.set_password(password)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -35,6 +35,17 @@ class ProductCategory(db.Model):
         self.img_selected = img_selected
         self.img = img
     
+    @property
+    def serialize(self):
+        products = Products.query.filter_by(category_id=self.id).all()
+        return {
+            'id':self.id,
+            'name':self.name,
+            'img_selected':self.img_selected,
+            'img':self.img,
+            'product': [product.serialize for product in products]
+        }
+
 class Products(db.Model):
     __tablename__ = 'products'
     __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'} 
@@ -57,6 +68,19 @@ class Products(db.Model):
         self.img = img
         self.img2 = img2
         self.price = price
+
+    @property
+    def serialize(self):
+        """Return object data in easily serializable format"""
+        return {
+            'id'            :self.id,
+            'name'          :self.name,
+            'intro'         :self.introduction,
+            'description'   :self.description,
+            'img'           :self.img,
+            'img2'          :self.img2,
+            'price'         :self.price
+        }
 
 class Mixture(db.Model):
     __tablename__ = 'mixture'
