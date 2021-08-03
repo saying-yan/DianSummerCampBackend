@@ -107,3 +107,16 @@ class ProductsMixture(db.Model):
     def __init__(self, products_id, mixture_id) -> None:
         self.products_id = products_id
         self.mixture_id = mixture_id
+
+class Order(db.Model):
+    __tablename__ = 'order'
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'} 
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id =  db.Column(db.Integer, db.ForeignKey('user_info.uid'))
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    num = db.Column(db.Integer)
+
+    def __init__(self, user_id, product_id, num) -> None:
+        self.user_id = user_id
+        self.product_id = product_id
+        self.num = num

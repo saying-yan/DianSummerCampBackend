@@ -26,7 +26,7 @@ def login():
         return jsonify({'status': 'error', 'msg': '登录失败'})
     
     payload = {'username': username}
-    return jsonify(status='success', msg='', jwt=generate_jwt(payload))
+    return jsonify(status='success', msg='', username=username, jwt=generate_jwt(payload))
 
 
 @auth_bp.route('/register', methods=['POST'])
