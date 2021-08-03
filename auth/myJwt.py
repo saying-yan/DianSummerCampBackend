@@ -41,7 +41,8 @@ def verify_jwt(token, secret=None):
 def jwt_required(fn):
     @wraps(fn)
     def wapper(*args, **kwargs):
-        auth_jwt = request.headers.get('Authorization')
+        auth_jwt = request.headers.get('Authentication')
+        print(auth_jwt)
         if not auth_jwt:
             return jsonify({'status': 'error', 'msg': '认证错误'})
         

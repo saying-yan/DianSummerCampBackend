@@ -10,6 +10,7 @@ class UserInfo(db.Model):
     username = db.Column(db.String(30))
     phone_number = db.Column(db.String(11))
     password_hash = db.Column(db.String(128))
+    wallet = db.Column(db.Float(precision="7,2"), default=100)
 
     def __init__(self, username, phone_number, password) -> None:
         self.username = username
